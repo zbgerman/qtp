@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem 
+        id="qtp_main_menu" 
+        name="Qtp" 
+    />
+    <menuitem 
+        id="qtp_tasks" 
+        name="Tasks" 
+        sequence="5" 
+        parent="qtp_main_menu" 
+        action="qtp_tasks_list_action"
+    />
+
+    <menuitem 
+        id="details_tasks_menu" 
+        name="Details Tasks" 
+        sequence="10" 
+        parent="qtp_main_menu" 
+        action="qtp_details_tasks_list_action" 
+    />
+
+    <menuitem 
+        id="type_tasks_menu" 
+        name="Type Tasks" 
+        sequence="15" 
+        parent="qtp_main_menu" 
+        action="qtp_type_tasks_list_action" 
+    />
+
+</odoo>

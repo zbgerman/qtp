@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_qtp_tasks,qtp.task_user,model_qtp_tasks,base.group_user,1,1,1,1
+access_qtp_type_task,qtp.type_user,model_qtp_type_task,base.group_user,1,1,1,1
+access_qtp_details_tasks,qtp.details_user,model_qtp_details_tasks,base.group_user,1,1,1,1

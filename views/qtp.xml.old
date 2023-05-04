@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record model="ir.ui.view" id="tasks_form_view">
+            <field name="name">tasks.form</field>
+            <field name="model">qtp.tasks</field>
+            <field name="arch" type="xml">
+                <form string="Tasks Form">
+                    <sheet>
+                        <group>
+                            <group string='Grupo 1'>
+				<field name="id"/>
+                                <field name="type_task_id"/>
+				<field name="title"/>
+				<field name="description"/>
+				<field name="status"/>
+				<field name="priority"/>
+			    </group>
+			    <group string='Grupo 2'>
+  				<field name="priority"/>
+				<field name="user_id"/>
+				<field name="assigned_id" widget="many2many_tags"/>
+				<field name="start_date"/>
+				<field name="end_date"/>
+				<field name="start_time"/>
+				<field name="end_time"/>
+				<field name="price"/>
+			    </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+				<field name="details_ids"/>
+				    <tree default_order="id desc" editable="top" string="Registered details" delete="false" limit="5"/>
+					<field name="id" readonly="True"/>
+					<field name="task_id" readonly="True"/>
+					<field name="details" attrs="{'readonly':[('id','>','0')]}"/>
+					<field name="create_uid" readonly="True"/>
+					<field name="create_date" readonly="True"/>
+					<field name="write_uid" readonly="True"/>
+					<field name="write_date" readonly="True"/>
+				    </tree>
+				</field>
+			    </page>
+			</notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="tasks_tree_view">
+            <field name="name">tasks.tree</field>
+            <field name="model">qtp.tasks</field>
+            <field name="arch" type="xml">
+                <tree string="Tasks Tree">
+                            <field name="id"/>
+                            <field name="title"/>
+                            <field name="type_task_id"/>
+                            <field name="description"/>
+                            <field name="status"/>
+                            <field name="priority"/>
+                            <field name="user_id"/>
+                            <field name="assigned_id" widget="many2many_tags"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="price"/>
+                </tree>
+            </field>
+        </record>     
+        <record model="ir.ui.view" id="tasks_search_view">
+            <field name="name">tasks.search</field>
+            <field name="model">qtp.tasks</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="description"/>
+                    <field name="title"/> 
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="type_tasks_form_view">
+            <field name="name">type_tasks.form</field>
+            <field name="model">qtp.type_task</field>
+            <field name="arch" type="xml">
+                <form string="Type Tasks Form">
+                    <sheet>
+                        <group>
+                            <field name="name_task"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="type_tasks_tree_view">
+            <field name="name">type_tasks.tree</field>
+            <field name="model">qtp.type_task</field>
+            <field name="arch" type="xml">
+                <tree string="Type Tasks Tree">
+                            <field name="name_task"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="type_tasks_search_view">
+            <field name="name">type_tasks.search</field>
+            <field name="model">qtp.type_task</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name_task"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="details_tasks_form_view">
+            <field name="name">details_tasks.form</field>
+            <field name="model">qtp.details_tasks</field>
+            <field name="arch" type="xml">
+                <form string="Type Tasks Form">
+                    <sheet>
+                        <group>
+                            <field name="details"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="details_tasks_tree_view">
+            <field name="name">details_tasks.tree</field>
+            <field name="model">qtp.details_tasks</field>
+            <field name="arch" type="xml">
+                <tree string="Details Tasks Tree" create="false" edit="false" delete="false">
+			    <field name="task_id"/>
+                            <field name="details"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        
+        <record model="ir.actions.act_window" id="qtp_tasks_list_action">
+            <field name="name">Tasks</field>
+            <field name="res_model">qtp.tasks</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first Task
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_qtp_menu" name="QTP"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="qtp_menu" name="QTP"
+                  parent="main_qtp_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="tasks_menu" name="Tasks" parent="qtp_menu"
+                  action="qtp_tasks_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+
+        <record model="ir.actions.act_window" id="qtp_type_tasks_list_action">
+            <field name="name">Type Tasks</field>
+            <field name="res_model">qtp.type_task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="type_tasks_menu" name="TypeTasks" parent="qtp_menu"
+                  action="qtp_type_tasks_list_action"/>
+
+        <record model="ir.actions.act_window" id="qtp_idetails_tasks_list_action">
+            <field name="name">Details Tasks</field>
+            <field name="res_model">qtp.details_tasks</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+</odoo>
